@@ -7,6 +7,8 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
 
 function Home() {
   const products = [
@@ -21,32 +23,43 @@ function Home() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Welcome to MarketCollector!
-      </Typography>
-      <Typography variant="body1" gutterBottom>
-        Explore a wide variety of products.
-      </Typography>
+    <div>
+      {/* Header */}
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Home
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-      <Grid container spacing={4} sx={{ mt: 2 }}>
-        {products.map((product) => (
-          <Grid item key={product.id} xs={6} sm={6}>
-            <Card>
-              <CardMedia component="img" height="140" image={product.image} alt={product.name} />
-              <CardContent>
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2" color="text.secondary">{product.price}</Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">View</Button>
-                <Button size="small">Buy</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+      <Container sx={{ mt: 4 }}>
+        <Typography variant="h4" gutterBottom>
+          Welcome to MarketCollector!
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          Explore a wide variety of products.
+        </Typography>
+
+        <Grid container spacing={4} sx={{ mt: 2 }}>
+          {products.map((product) => (
+            <Grid item key={product.id} xs={6} sm={6}>
+              <Card>
+                <CardMedia component="img" height="140" image={product.image} alt={product.name} />
+                <CardContent>
+                  <Typography variant="h6">{product.name}</Typography>
+                  <Typography variant="body2" color="text.secondary">{product.price}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">View</Button>
+                  <Button size="small">Buy</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </div>
   );
 }
 
