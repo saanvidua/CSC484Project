@@ -29,10 +29,10 @@ function OrderConfirm() {
       {/* Main Content */}
       <Container sx={{ mt: 4, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
-          Your Order has been Confirmed!
+          Your Listing has been Confirmed!
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Thank you for your purchase.
+          Thank you for selling on MarketCollector.
         </Typography>
         <Button variant="contained" onClick={handleGoHome} sx={{ mt: 2 }}>
           Go Home
