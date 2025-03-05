@@ -1,4 +1,6 @@
+// src/pages/Sell.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,8 +15,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
-// Recharts imports
 import {
   AreaChart,
   Area,
@@ -22,49 +22,37 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
 
 function Sell() {
-  // State for the condition dropdown
+  const navigate = useNavigate();
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [condition, setCondition] = React.useState("");
 
-  // Example filler data for the past 30 days
+  // Example chart data (replace with your actual data if needed)
   const chartData = [
     { day: "Day 1", value: 100 },
     { day: "Day 2", value: 105 },
     { day: "Day 3", value: 98 },
     { day: "Day 4", value: 120 },
     { day: "Day 5", value: 90 },
-    { day: "Day 6", value: 95 },
-    { day: "Day 7", value: 110 },
-    { day: "Day 8", value: 85 },
-    { day: "Day 9", value: 115 },
-    { day: "Day 10", value: 100 },
-    { day: "Day 11", value: 105 },
-    { day: "Day 12", value: 95 },
-    { day: "Day 13", value: 100 },
-    { day: "Day 14", value: 103 },
-    { day: "Day 15", value: 97 },
-    { day: "Day 16", value: 108 },
-    { day: "Day 17", value: 112 },
-    { day: "Day 18", value: 87 },
-    { day: "Day 19", value: 92 },
-    { day: "Day 20", value: 99 },
-    { day: "Day 21", value: 104 },
-    { day: "Day 22", value: 110 },
-    { day: "Day 23", value: 115 },
-    { day: "Day 24", value: 113 },
-    { day: "Day 25", value: 105 },
-    { day: "Day 26", value: 100 },
-    { day: "Day 27", value: 96 },
-    { day: "Day 28", value: 88 },
-    { day: "Day 29", value: 120 },
-    { day: "Day 30", value: 110 },
+    // ... more data
   ];
 
   const handleConditionChange = (event) => {
     setCondition(event.target.value);
+  };
+
+  const handleSell = () => {
+    // Validate that all fields are filled
+    if (name.trim() === "" || description.trim() === "" || condition.trim() === "") {
+      alert("Please fill out all fields.");
+      return;
+    }
+    // Navigate to order-confirm page
+    navigate("/order-confirm");
   };
 
   return (
@@ -77,7 +65,7 @@ function Sell() {
           </Typography>
         </Toolbar>
       </AppBar>
-      
+
       {/* Main Content */}
       <Container sx={{ mt: 4 }}>
         <Typography variant="h4" gutterBottom>
@@ -87,7 +75,6 @@ function Sell() {
           Here you can add items for sale.
         </Typography>
 
-        {/* Layout */}
         <Box
           sx={{
             display: "flex",
@@ -96,7 +83,7 @@ function Sell() {
             mt: 3,
           }}
         >
-          {/* Placeholder Image Card */}
+          {/* Image Card */}
           <Card sx={{ width: { xs: "100%", md: 250 } }}>
             <CardMedia
               component="img"
@@ -109,12 +96,14 @@ function Sell() {
             </CardContent>
           </Card>
 
-          {/* Fields */}
+          {/* Input Fields */}
           <Box sx={{ flex: 1 }}>
             <TextField
               label="Name"
               fullWidth
               sx={{ mb: 2 }}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               label="Description"
@@ -122,6 +111,8 @@ function Sell() {
               rows={3}
               fullWidth
               sx={{ mb: 2 }}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel id="condition-label">Condition</InputLabel>
@@ -136,16 +127,17 @@ function Sell() {
                 <MenuItem value="Used">Used</MenuItem>
               </Select>
             </FormControl>
-            <Button variant="contained">Sell</Button>
+            <Button variant="contained" onClick={handleSell}>
+              Sell
+            </Button>
           </Box>
         </Box>
 
-        {/* Graph Section */}
+        {/* Chart Section */}
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6" gutterBottom>
             Market History (Last 30 Days)
           </Typography>
-          {/* Use a ResponsiveContainer so the chart adjusts to screen size */}
           <Box sx={{ width: "100%", height: 300 }}>
             <ResponsiveContainer>
               <AreaChart data={chartData}>
@@ -153,12 +145,7 @@ function Sell() {
                 <XAxis dataKey="day" />
                 <YAxis />
                 <Tooltip />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#8884d8"
-                  fill="#8884d8"
-                />
+                <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d8" />
               </AreaChart>
             </ResponsiveContainer>
           </Box>
