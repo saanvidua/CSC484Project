@@ -15,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import itemsData from "../data/itemsData"; // Import centralized item data
+import exploreItemsData from "../data/exploreItemsData"; // Import centralized item data
 import { IconButton, Menu } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -38,6 +38,7 @@ const searchResults = [
 
 export default function Explore() {
     const navigate = useNavigate();
+
     const [searchTerm, setSearchTerm] = useState("");
     const [items, setItems] = useState(initialItems);  // Start with trending/recommended
     const [anchorEl, setAnchorEl] = useState(null);  // For filter menu
@@ -49,6 +50,7 @@ export default function Explore() {
         setItems(searchResults);
         setSearchPerformed(true);
     };
+    
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter") {
@@ -138,7 +140,8 @@ export default function Explore() {
                             <Grid item xs={12} sm={6} md={3} key={item.id}>
                                 <Card
                                     sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
-                                    onClick={() => navigate(`/item/${item.id}`)}
+                                    onClick={() => navigate(`/item/${item.id}`, { state: { item, source: 'explore' }})}
+
                                 >
                                     <CardMedia component="img" height="140" image={item.image} alt={item.name} />
                                     <CardContent>

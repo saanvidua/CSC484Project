@@ -6,7 +6,8 @@ import Collection from "./pages/Collection";
 import Search from "./pages/Search";
 import Sell from "./pages/Sell";
 import Account from "./pages/Account";
-import ItemDetails from "./pages/ItemDetails"; // Ensure this file exists
+import CollectionItemDetails from "./pages/collectionItemDetails"; // Ensure this file exists
+import ExploreItemDetails from "./pages/exploreItemDetails"; // Ensure this file exists
 import OrderConfirm from "./pages/OrderConfirm"; // Ensure this file exists
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -54,8 +55,10 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/sell" element={<Sell />} />
         <Route path="/account" element={<Account />} />
-        <Route path="/item/:id" element={<ItemDetails />} />
         <Route path="/order-confirm" element={<OrderConfirm />} />
+        <Route path="/item/:id" element={<ExploreItemDetails />} />
+        <Route path="/collection-item/:id" element={<CollectionItemDetails />} />
+
       </Routes>
 
       <BottomNavBar />

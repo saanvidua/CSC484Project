@@ -10,7 +10,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import itemsData from "../data/itemsData"; // Import centralized item data
+import exploreItemsData from "../data/exploreItemsData"; // Import centralized item data
 
 function Home() {
   const navigate = useNavigate();
@@ -31,9 +31,9 @@ function Home() {
 
         {/* Corrected Grid Layout */}
         <Grid container spacing={4} sx={{ mt: 2 }}>
-          {itemsData.map((product) => (
+          {exploreItemsData.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
-              <Card sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 }, height: "100%" }} onClick={() => navigate(`/item/${product.id}`)}>
+              <Card sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 }, height: "100%" }} onClick={() => navigate(`/item/${product.id}`, { state: {item: product, source: 'explore'  }})}>
                 <CardMedia 
                   component="img"
                   image={product.image}

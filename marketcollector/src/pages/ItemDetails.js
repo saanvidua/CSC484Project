@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Container, Typography, Card, CardMedia, CardContent, CardActions, Button, AppBar, Toolbar, IconButton, Grid, Box } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import itemsData from "../data/itemsData"; // Import centralized item data
@@ -18,9 +18,11 @@ import {
 function ItemDetails() {
   const { id } = useParams(); // Get the item ID from the URL
   const navigate = useNavigate();
+  const location = useLocation();
 
   // Convert ID from URL to a number and find item in `itemsData.js`
   const item = itemsData.find((item) => item.id === parseInt(id));
+  const source = location.state?.source || 'explore';  // Default to 'explore' if no source provided
 
   // Handle case where the item is not found
   if (!item) {
@@ -33,6 +35,9 @@ function ItemDetails() {
       </Container>
     );
   }
+  const handleSellItem = () => {
+    navigate("/sell", { state: { item } });
+  };
 
   return (
     <Container sx={{ mt: 4 }}>

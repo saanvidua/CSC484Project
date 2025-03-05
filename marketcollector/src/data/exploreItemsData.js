@@ -1,4 +1,5 @@
-const itemsData = [
+// used for search and explore - basically items we can buy
+const exploreItemsData = [
     {
       id: 1,
       name: "Charizard Pokémon Card",
@@ -49,4 +50,4 @@ const itemsData = [
     },
   ];
   
-  export default itemsData;  
+  export default exploreItemsData;  
