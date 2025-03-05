@@ -2,10 +2,10 @@
 const collectionItemsData = [
     {
       id: 1,
-      name: "Card1",
-      image: "/images/char.jpg", // Corrected path from public folder
-      price: "$140.00",
-      description: "Card Description.",
+      name: "19th Century U.S. Coins",
+      image: "/images/uscoins.jpg", // Corrected path from public folder
+      price: "$240.00",
+      description: "Collection of 10 coins from the 1800s.",
       priceTrend: [
         { day: "Day 1", price: 200 },
         { day: "Day 2", price: 210 },
@@ -18,42 +18,42 @@ const collectionItemsData = [
     },
     {
       id: 2,
-      name: "Card2",
-      image: "/images/luka.webp", // Corrected path from public folder
-      price: "$120.00",
-      description: "Card Description",
+      name: "Pokemon 151 Scarlet and Violet Posters",
+      image: "/images/pokemon151.jpg", // Corrected path from public folder
+      price: "$50.00",
+      description: "Scored this at a goodwill! Added to my pokemon collection",
       priceTrend: [
-        { day: "Day 1", price: 110 },
-        { day: "Day 2", price: 115 },
-        { day: "Day 3", price: 120 },
-        { day: "Day 4", price: 118 },
-        { day: "Day 5", price: 122 },
-        { day: "Day 6", price: 119 },
-        { day: "Day 7", price: 125 },
-      ],
-    },
-    {
-      id: 3,
-      name: "Card 3",
-      image: "/images/pika.jpg", // Corrected path from public folder
-      price: "$40.00",
-      description: "Card Description",
-      priceTrend: [
-        { day: "Day 1", price: 30 },
-        { day: "Day 2", price: 35 },
-        { day: "Day 3", price: 33 },
-        { day: "Day 4", price: 38 },
-        { day: "Day 5", price: 40 },
-        { day: "Day 6", price: 42 },
+        { day: "Day 1", price: 20 },
+        { day: "Day 2", price: 15 },
+        { day: "Day 3", price: 12 },
+        { day: "Day 4", price: 18 },
+        { day: "Day 5", price: 12 },
+        { day: "Day 6", price: 19 },
         { day: "Day 7", price: 45 },
       ],
     },
     {
+      id: 3,
+      name: "Sports Cards",
+      image: "/images/sportscards.webp", // Corrected path from public folder
+      price: "$1500.00",
+      description: "All of my sports cards I've been collecting over the years. Special Editions from 2012-2025",
+      priceTrend: [
+        { day: "Day 1", price: 1230 },
+        { day: "Day 2", price: 1305 },
+        { day: "Day 3", price: 1133 },
+        { day: "Day 4", price: 1038 },
+        { day: "Day 5", price: 1240 },
+        { day: "Day 6", price: 1420 },
+        { day: "Day 7", price: 1450 },
+      ],
+    },
+    {
         id: 4,
-        name: "Card 4",
-        image: "/images/pika.jpg", // Corrected path from public folder
+        name: "Marvel Funko Pops",
+        image: "/images/funkopops.webp", // Corrected path from public folder
         price: "$20.00",
-        description: "Card Description",
+        description: "Special Release 2024. Not for sale at all.",
         priceTrend: [
           { day: "Day 1", price: 30 },
           { day: "Day 2", price: 35 },
