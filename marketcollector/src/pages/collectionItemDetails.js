@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Container, Typography, Card, CardMedia, CardContent, CardActions, Button, AppBar, Toolbar, IconButton, Grid, Box } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import collectionItemsData from "../data/collectionItemsData";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 function CollectionItemDetails() {
     const { id } = useParams();
@@ -49,6 +50,23 @@ function CollectionItemDetails() {
                     </CardActions>
                 </Grid>
             </Grid>
+            <Box sx={{ mt: 4 }}>
+    <Typography variant="h6" gutterBottom>
+        Market History (Last 7 Days)
+    </Typography>
+    <Box sx={{ width: "100%", height: 300 }}>
+        <ResponsiveContainer>
+            <AreaChart data={item.priceTrend || []}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="day" />
+                <YAxis />
+                <Tooltip />
+                <Area type="monotone" dataKey="price" stroke="#8884d8" fill="#8884d8" />
+            </AreaChart>
+        </ResponsiveContainer>
+    </Box>
+</Box>
+
         </Container>
     );
 }
