@@ -16,23 +16,23 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: ['Poppins', 'Roboto', 'Arial', 'sans-serif'].join(','),
+        fontFamily: ['Commissioner', 'Arial', 'sans-serif'].join(','),
         h1: {
-            fontFamily: 'Poppins',  // For large headers
+            fontFamily: 'Libre Bodoni',  // For large headers
             fontWeight: 700,
             color: '#4E342E',
         },
         h4: {
-            fontFamily: 'Poppins',
+            fontFamily: 'Commissioner',
             fontWeight: 600,
             color: '#4E342E',
         },
         body1: {
-            fontFamily: 'Roboto',  // Main body text font
+            fontFamily: 'Karla',  // Main body text font
             color: '#4E342E',
         },
         caption: {
-            fontFamily: 'Arial',  // Smaller captions or alert text
+            fontFamily: 'Karla',  // Smaller captions or alert text
             fontSize: '0.85rem',
             color: '#4E342E',
         },
