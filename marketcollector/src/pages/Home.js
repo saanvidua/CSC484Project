@@ -33,7 +33,12 @@ function Home() {
         <Grid container spacing={4} sx={{ mt: 2 }}>
           {exploreItemsData.map((product) => (
             <Grid item key={product.id} xs={12} sm={6} md={4}>
-              <Card sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 }, height: "100%" }} onClick={() => navigate(`/item/${product.id}`, { state: {item: product, source: 'explore'  }})}>
+              <Card sx={{ cursor: "pointer",
+              border: '4px solid #80471C',  // Dark brown border
+              borderRadius: '8px', 
+               "&:hover": { boxShadow: 6 }, 
+               height: "100%" }} 
+               onClick={() => navigate(`/item/${product.id}`, { state: {item: product, source: 'explore'  }})}>
                 <CardMedia 
                   component="img"
                   image={product.image}

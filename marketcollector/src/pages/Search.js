@@ -139,7 +139,8 @@ export default function Explore() {
                         {items.map((item) => (
                             <Grid item xs={12} sm={6} md={3} key={item.id}>
                                 <Card
-                                    sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
+                                    sx={{ border: '4px solid #80471C',  // Dark brown border
+                                    borderRadius: '8px', cursor: "pointer", "&:hover": { boxShadow: 6 } }}
                                     onClick={() => navigate(`/item/${item.id}`, { state: { item, source: 'explore' }})}
 
                                 >

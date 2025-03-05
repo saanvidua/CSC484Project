@@ -118,7 +118,8 @@ function Sell() {
           }}
         >
           {/* Image Preview */}
-          <Card sx={{ width: { xs: "100%", md: 250 } }}>
+          <Card sx={{ border: '4px solid #80471C',  // Dark brown border
+              borderRadius: '8px', width: { xs: "100%", md: 250 } }}>
             <CardMedia
               component="img"
               image={image}

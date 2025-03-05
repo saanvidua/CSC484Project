@@ -41,7 +41,8 @@ function Collection() {
                     {collectionItemsData.map((item) => (
                         <Grid item xs={12} sm={6} md={4} key={item.id}>
                             <Card
-                                sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
+                                sx={{ border: '4px solid #80471C',  // Dark brown border
+                                borderRadius: '8px', cursor: "pointer", "&:hover": { boxShadow: 6 } }}
                                 onClick={() => handleNavigateToItemDetails(item)}
                             >
                                 <CardMedia component="img" height="140" image={item.image} alt={item.name} />
