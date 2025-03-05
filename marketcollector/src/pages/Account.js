@@ -7,22 +7,23 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 function Account() {
   const [tabValue, setTabValue] = React.useState(0);
 
-  // Handle tab changes
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
   return (
     <>
-      {/* Header / AppBar */}
+      {/* Header */}
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Settings
+            Account
           </Typography>
         </Toolbar>
       </AppBar>
@@ -41,15 +42,22 @@ function Account() {
 
         {/* Tabs for different sections */}
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={tabValue} onChange={handleTabChange} aria-label="settings tabs">
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            aria-label="account tabs"
+            variant="scrollable"          // Enables horizontal scrolling
+            scrollButtons="auto"          // Show scroll buttons when needed
+            allowScrollButtonsMobile      // Force scroll buttons on mobile
+          >
             <Tab label="My Collection" />
-            <Tab label="Selling" />
             <Tab label="Favorites" />
             <Tab label="Price Tracking" />
+            <Tab label="Settings" />
           </Tabs>
         </Box>
 
-        {/* Tab content: use conditional rendering to show the right content */}
+        {/* Tab content */}
         <Box sx={{ mt: 2 }}>
           {tabValue === 0 && (
             <Typography>
@@ -58,18 +66,43 @@ function Account() {
           )}
           {tabValue === 1 && (
             <Typography>
-              <strong>Selling</strong> content goes here...
+              <strong>Favorites</strong> content goes here...
             </Typography>
           )}
           {tabValue === 2 && (
             <Typography>
-              <strong>Favorites</strong> content goes here...
+              <strong>Price Tracking</strong> content goes here...
             </Typography>
           )}
           {tabValue === 3 && (
-            <Typography>
-              <strong>Price Tracking</strong> content goes here...
-            </Typography>
+            <Box>
+              <Typography variant="h6" gutterBottom>
+                Account Settings
+              </Typography>
+              {/* Example settings form */}
+              <TextField
+                label="Email"
+                variant="outlined"
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="Username"
+                variant="outlined"
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="Password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <Button variant="contained" color="primary">
+                Save Changes
+              </Button>
+            </Box>
           )}
         </Box>
       </Container>
