@@ -19,17 +19,6 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      {/* Top Navigation */}
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MarketCollector
-          </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Sign Up</Button>
-        </Toolbar>
-      </AppBar>
-
       {/* Page Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
