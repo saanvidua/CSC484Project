@@ -22,18 +22,16 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 
 // Hardcoded items shown before search - Trending Items?
 const initialItems = [
-    { id: 1, name: 'Trending Item 1', image: 'https://via.placeholder.com/150', price: 25.00 },
-    { id: 2, name: 'Trending Item 2', image: 'https://via.placeholder.com/150', price: 30.00 },
-    { id: 3, name: 'Recommended Item 1', image: 'https://via.placeholder.com/150', price: 65.00 },
-    { id: 4, name: 'Recommended Item 2', image: 'https://via.placeholder.com/150', price: 95.00 },
+    { id: 1, name: 'Charizard Pokemon Card', image: '/images/char.jpg', price: 250.00 },
+    { id: 2, name: 'Luka Dončić Dallas Mavericks Jersey', image: '/images/luka.webp', price: 120.00 },
+    { id: 3, name: 'Pikachu Pokemon Card', image: '/images/pika.jpg', price: 65.00 },
 ];
 
 const searchResults = [
-    { id: 5, name: 'Search Result 1', image: 'https://via.placeholder.com/150', price: 50.00 },
-    { id: 6, name: 'Search Result 2', image: 'https://via.placeholder.com/150', price: 155.00 },
-    { id: 7, name: 'Search Result 3', image: 'https://via.placeholder.com/150', price: 70.00 },
-    { id: 8, name: 'Search Result 4', image: 'https://via.placeholder.com/150', price: 85.00 },
-    { id: 9, name: 'Search Result 5', image: 'https://via.placeholder.com/150', price: 10.00 },
+    { id: 4, name: 'Captain America Funko Pop', image: '/images/americafunko.jpg', price: 15.00 },
+    { id: 5, name: 'Special Edition Red Hulk FP', image: '/images/redhulk.webp', price: 30.00 },
+    { id: 6, name: '8 Rare Marvel Funko Pops!', image: '/images/rarefunko.jpg', price: 150.00 },
+    { id: 7, name: 'Marvel Spidey Funko Exclusive Sale', image: '/images/spideyfunko.webp', price: 25.00 },
 ];
 
 export default function Explore() {
