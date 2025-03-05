@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,78 +16,135 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import itemsData from "../data/itemsData"; // Import centralized item data
+import { IconButton, Menu } from "@mui/material"
+import SearchIcon from "@mui/icons-material/Search";
+import FilterListIcon from "@mui/icons-material/FilterList";
+
+// Hardcoded items shown before search - Trending Items?
+const initialItems = [
+    { id: 1, name: 'Trending Item 1', image: 'https://via.placeholder.com/150', price: 25.00 },
+    { id: 2, name: 'Trending Item 2', image: 'https://via.placeholder.com/150', price: 30.00 },
+    { id: 3, name: 'Recommended Item 1', image: 'https://via.placeholder.com/150', price: 65.00 },
+    { id: 4, name: 'Recommended Item 2', image: 'https://via.placeholder.com/150', price: 95.00 },
+];
+
+const searchResults = [
+    { id: 5, name: 'Search Result 1', image: 'https://via.placeholder.com/150', price: 50.00 },
+    { id: 6, name: 'Search Result 2', image: 'https://via.placeholder.com/150', price: 155.00 },
+    { id: 7, name: 'Search Result 3', image: 'https://via.placeholder.com/150', price: 70.00 },
+    { id: 8, name: 'Search Result 4', image: 'https://via.placeholder.com/150', price: 85.00 },
+    { id: 9, name: 'Search Result 5', image: 'https://via.placeholder.com/150', price: 10.00 },
+];
 
 export default function Explore() {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [sortOrder, setSortOrder] = React.useState("asc");
+    const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState("");
+    const [items, setItems] = useState(initialItems);  // Start with trending/recommended
+    const [anchorEl, setAnchorEl] = useState(null);  // For filter menu
 
-  // Filter and sort items
-  const filteredItems = itemsData
-    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    .sort((a, b) => (sortOrder === "asc" ? a.price - b.price : b.price - a.price));
+    const handleSearch = () => {
+        // On search (button click or Enter), show the hardcoded searchResults (ignoring the actual term)
+        setItems(searchResults);
+    };
 
-  return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      {/* Fixed Header */}
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Explore
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    };
 
-      {/* Scrollable Content Area */}
-      <Box sx={{ mt: 8, flex: 1, overflowY: "auto" }}>
-        <Container sx={{ mt: 2 }}>
-          <Typography variant="h4" gutterBottom>
-            Explore Items
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Search for items you want to explore.
-          </Typography>
+    const openFilterMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
-          {/* Search & Sort */}
-          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, mb: 3 }}>
-            <TextField
-              label="Search"
-              variant="outlined"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              fullWidth
-            />
-            <Button variant="contained">Search</Button>
-          </Box>
+    const closeFilterMenu = () => {
+        setAnchorEl(null);
+    };
 
-          <FormControl fullWidth sx={{ mb: 3 }}>
-            <InputLabel id="sort-order-label">Sort by Price</InputLabel>
-            <Select labelId="sort-order-label" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
-              <MenuItem value="asc">Ascending</MenuItem>
-              <MenuItem value="desc">Descending</MenuItem>
-            </Select>
-          </FormControl>
+    const handleSort = (order) => {
+        const sortedItems = [...items].sort((a, b) =>
+            order === "asc" ? a.price - b.price : b.price - a.price
+        );
+        setItems(sortedItems);
+        closeFilterMenu();
+    };
 
-          {/* Items Grid */}
-          <Grid container spacing={2}>
-            {filteredItems.map((item) => (
-              <Grid item xs={12} sm={6} md={3} key={item.id}>
-                <Card
-                  sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
-                  onClick={() => navigate(`/item/${item.id}`)}
-                >
-                  <CardMedia component="img" height="140" image={item.image} alt={item.name} />
-                  <CardContent>
-                    <Typography variant="h6">{item.name}</Typography>
-                    <Typography variant="body2">Price: {item.price}</Typography>
-                  </CardContent>
-                  <Button size="small">Buy</Button>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
-    </Box>
-  );
+    return (
+        <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+            {/* Fixed Header */}
+            <AppBar position="fixed">
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                        Explore
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+
+            {/* Scrollable Content Area */}
+            <Box sx={{ mt: 8, flex: 1, overflowY: "auto" }}>
+                <Container sx={{ mt: 2 }}>
+                    <Typography variant="h4" gutterBottom>
+                        Explore Items
+                    </Typography>
+
+                    {/* Search Bar with Search Icon and Filter Icon */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                            backgroundColor: "#f5f5f5",
+                            borderRadius: "8px",
+                            padding: "4px 8px",
+                            mb: 3
+                        }}
+                    >
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            placeholder="Search for items..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            InputProps={{ sx: { backgroundColor: "white", borderRadius: "4px" } }}
+                        />
+                        <IconButton onClick={handleSearch}>
+                            <SearchIcon />
+                        </IconButton>
+                        <IconButton onClick={openFilterMenu}>
+                            <FilterListIcon />
+                        </IconButton>
+                    </Box>
+
+                    {/* Filter Menu (Dropdown for Sort Options) */}
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={closeFilterMenu}
+                    >
+                        <MenuItem onClick={() => handleSort("asc")}>Price: Low to High</MenuItem>
+                        <MenuItem onClick={() => handleSort("desc")}>Price: High to Low</MenuItem>
+                    </Menu>
+
+                    {/* Items Grid */}
+                    <Grid container spacing={2}>
+                        {items.map((item) => (
+                            <Grid item xs={12} sm={6} md={3} key={item.id}>
+                                <Card
+                                    sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
+                                    onClick={() => navigate(`/item/${item.id}`)}
+                                >
+                                    <CardMedia component="img" height="140" image={item.image} alt={item.name} />
+                                    <CardContent>
+                                        <Typography variant="h6">{item.name}</Typography>
+                                        <Typography variant="body2">Price: ${item.price.toFixed(2)}</Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </Box>
+        </Box>
+    );
 }
