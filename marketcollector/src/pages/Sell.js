@@ -1,6 +1,7 @@
 // src/pages/Sell.jsx
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -27,9 +28,17 @@ import {
 
 function Sell() {
   const navigate = useNavigate();
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [condition, setCondition] = React.useState("");
+  const location = useLocation();
+
+  // Extract item from navigation state, if available
+  const initialItem = location.state?.item || {};
+
+  const [name, setName] = useState(initialItem.name || "");
+  const [description, setDescription] = useState(initialItem.description || "");
+  const [price, setPrice] = useState(initialItem.price || "");
+  const [image, setImage] = useState(initialItem.image || "https://via.placeholder.com/250x200");
+  const [condition, setCondition] = useState("");
+
 
   // Example chart data (replace with your actual data if needed)
   const chartData = [
@@ -69,10 +78,10 @@ function Sell() {
       {/* Main Content */}
       <Container sx={{ mt: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Sell
+          List an item for sale
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Here you can add items for sale.
+            Fill out the details to list your item for sale.
         </Typography>
 
         <Box
@@ -83,16 +92,16 @@ function Sell() {
             mt: 3,
           }}
         >
-          {/* Image Card */}
+          {/* Image Preview */}
           <Card sx={{ width: { xs: "100%", md: 250 } }}>
             <CardMedia
               component="img"
-              image="https://via.placeholder.com/250x200"
+              image={image}
               alt="Item Image"
               sx={{ height: 200, objectFit: "cover" }}
             />
             <CardContent>
-              <Typography variant="body2">Upload/Update Image</Typography>
+              <Typography variant="body2">Image Preview</Typography>
             </CardContent>
           </Card>
 
@@ -114,6 +123,13 @@ function Sell() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
+            <TextField
+              label="Price"
+              fullWidth
+              sx={{ mb: 2 }}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel id="condition-label">Condition</InputLabel>
               <Select
@@ -128,12 +144,12 @@ function Sell() {
               </Select>
             </FormControl>
             <Button variant="contained" onClick={handleSell}>
-              Sell
+              List Item
             </Button>
           </Box>
         </Box>
 
-        {/* Chart Section */}
+        {/* Price Trend Chart */}
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6" gutterBottom>
             Market History (Last 30 Days)
