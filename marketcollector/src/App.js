@@ -1,7 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
+import Search from "./pages/Search";
+import Sell from "./pages/Sell";
+import Account from "./pages/Account";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -16,6 +19,24 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle"; // Account ic
 
 import "./App.css";
 
+function BottomNavBar() {
+  const location = useLocation(); // React Router hook to get current location
+
+  return (
+    <BottomNavigation
+      value={location.pathname}  // This highlights the correct tab
+      showLabels
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "white", boxShadow: "0px -2px 5px rgba(0,0,0,0.1)" }}
+    >
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" value="/" />
+      <BottomNavigationAction label="Explore" icon={<SearchIcon />} component={Link} to="/search" value="/search" />
+      <BottomNavigationAction label="Sell" icon={<SellIcon />} component={Link} to="/sell" value="/sell" />
+      <BottomNavigationAction label="Collection" icon={<CollectionsIcon />} component={Link} to="/collection" value="/collection" />
+      <BottomNavigationAction label="Account" icon={<AccountCircleIcon />} component={Link} to="/account" value="/account" />
+    </BottomNavigation>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -23,19 +44,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/sell" element={<Sell />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
 
-      {/* Bottom Navigation */}
-      <BottomNavigation
-        showLabels
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "white", boxShadow: "0px -2px 5px rgba(0,0,0,0.1)" }}
-      >
-        <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" />
-        <BottomNavigationAction label="Explore" icon={<SearchIcon />} component={Link} to="/explore" />
-        <BottomNavigationAction label="Sell" icon={<SellIcon />} component={Link} to="/sell" />
-        <BottomNavigationAction label="Collection" icon={<CollectionsIcon />} component={Link} to="/collection" />
-        <BottomNavigationAction label="Account" icon={<AccountCircleIcon />} component={Link} to="/account" />
-      </BottomNavigation>
+      {/* Bottom Navigation Bar */}
+      <BottomNavBar />
     </Router>
   );
 }
