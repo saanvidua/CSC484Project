@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -14,29 +15,17 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import itemsData from "../data/itemsData"; // Import centralized item data
 
 export default function Explore() {
-  // State for search and sort order
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [sortOrder, setSortOrder] = React.useState("asc"); // "asc" for ascending, "desc" for descending
+  const [sortOrder, setSortOrder] = React.useState("asc");
 
-  // Placeholder items with price property
-  const items = [
-    { id: 1, name: "Item 1", image: "https://via.placeholder.com/250x200", price: 10 },
-    { id: 2, name: "Item 2", image: "https://via.placeholder.com/250x200", price: 20 },
-    { id: 3, name: "Item 3", image: "https://via.placeholder.com/250x200", price: 30 },
-    { id: 4, name: "Item 4", image: "https://via.placeholder.com/250x200", price: 40 },
-  ];
-
-  // Filter items based on search term (case-insensitive)
-  const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Sort the filtered items by price
-  const sortedItems = filteredItems.sort((a, b) =>
-    sortOrder === "asc" ? a.price - b.price : b.price - a.price
-  );
+  // Filter and sort items
+  const filteredItems = itemsData
+    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => (sortOrder === "asc" ? a.price - b.price : b.price - a.price));
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
@@ -49,14 +38,8 @@ export default function Explore() {
         </Toolbar>
       </AppBar>
 
-      {/* Scrollable Content Area (below the AppBar) */}
-      <Box
-        sx={{
-          mt: 8, // space for the fixed AppBar (~64px)
-          flex: 1,
-          overflowY: "auto",
-        }}
-      >
+      {/* Scrollable Content Area */}
+      <Box sx={{ mt: 8, flex: 1, overflowY: "auto" }}>
         <Container sx={{ mt: 2 }}>
           <Typography variant="h4" gutterBottom>
             Explore Items
@@ -65,15 +48,8 @@ export default function Explore() {
             Search for items you want to explore.
           </Typography>
 
-          {/* Search Bar */}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              gap: 2,
-              mb: 3,
-            }}
-          >
+          {/* Search & Sort */}
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, mb: 3 }}>
             <TextField
               label="Search"
               variant="outlined"
@@ -81,57 +57,35 @@ export default function Explore() {
               onChange={(e) => setSearchTerm(e.target.value)}
               fullWidth
             />
-            <Button
-              variant="contained"
-              onClick={() => alert(`Searched for: ${searchTerm}`)}
-              sx={{ width: { xs: "100%", sm: "auto" } }}
-            >
-              Search
-            </Button>
+            <Button variant="contained">Search</Button>
           </Box>
 
-          {/* Sort by Price */}
-          <Box sx={{ mb: 3 }}>
-            <FormControl fullWidth>
-              <InputLabel id="sort-order-label">Sort by Price</InputLabel>
-              <Select
-                labelId="sort-order-label"
-                value={sortOrder}
-                label="Sort by Price"
-                onChange={(e) => setSortOrder(e.target.value)}
-              >
-                <MenuItem value="asc">Ascending</MenuItem>
-                <MenuItem value="desc">Descending</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel id="sort-order-label">Sort by Price</InputLabel>
+            <Select labelId="sort-order-label" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+              <MenuItem value="asc">Ascending</MenuItem>
+              <MenuItem value="desc">Descending</MenuItem>
+            </Select>
+          </FormControl>
 
           {/* Items Grid */}
           <Grid container spacing={2}>
-            {sortedItems.map((item) => (
+            {filteredItems.map((item) => (
               <Grid item xs={12} sm={6} md={3} key={item.id}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    image={item.image}
-                    alt={item.name}
-                    sx={{ height: 140, objectFit: "cover" }}
-                  />
+                <Card
+                  sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
+                  onClick={() => navigate(`/item/${item.id}`)}
+                >
+                  <CardMedia component="img" height="140" image={item.image} alt={item.name} />
                   <CardContent>
                     <Typography variant="h6">{item.name}</Typography>
-                    <Typography variant="body2">Price: ${item.price}</Typography>
+                    <Typography variant="body2">Price: {item.price}</Typography>
                   </CardContent>
+                  <Button size="small">Buy</Button>
                 </Card>
               </Grid>
             ))}
           </Grid>
-
-          {/* No Items Found Message */}
-          {sortedItems.length === 0 && (
-            <Typography variant="body1" sx={{ mt: 2 }}>
-              No items found.
-            </Typography>
-          )}
         </Container>
       </Box>
     </Box>
