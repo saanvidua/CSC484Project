@@ -16,6 +16,13 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import collectionItemsData from "../data/collectionItemsData";
 import {
   AreaChart,
   Area,
@@ -39,6 +46,7 @@ function Sell() {
   const [image, setImage] = useState(initialItem.image || "https://via.placeholder.com/250x200");
   const [condition, setCondition] = useState("");
 
+  const [showCollectionPicker, setShowCollectionPicker] = useState(false);
 
   // Example chart data (replace with your actual data if needed)
   const chartData = [
@@ -53,6 +61,16 @@ function Sell() {
   const handleConditionChange = (event) => {
     setCondition(event.target.value);
   };
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImage(reader.result); // Preview the uploaded image
+        };
+        reader.readAsDataURL(file);
+    }
+};
 
   const handleSell = () => {
     // Validate that all fields are filled
@@ -63,6 +81,13 @@ function Sell() {
     // Navigate to order-confirm page
     navigate("/order-confirm");
   };
+  const handleSelectFromCollection = (item) => {
+    setName(item.name);
+    setDescription(item.description);
+    setPrice(item.price);
+    setImage(item.image);
+    setShowCollectionPicker(false);
+};
 
   return (
     <div>
@@ -83,7 +108,7 @@ function Sell() {
         <Typography variant="body1" gutterBottom>
             Fill out the details to list your item for sale.
         </Typography>
-
+      
         <Box
           sx={{
             display: "flex",
@@ -102,6 +127,12 @@ function Sell() {
             />
             <CardContent>
               <Typography variant="body2">Image Preview</Typography>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ marginTop: "10px" }}
+                onChange={handleImageUpload}
+            />
             </CardContent>
           </Card>
 
@@ -143,13 +174,27 @@ function Sell() {
                 <MenuItem value="Used">Used</MenuItem>
               </Select>
             </FormControl>
-            <Button variant="contained" onClick={handleSell}>
-              List Item
-            </Button>
-          </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2, mt: 2 }}>
+              <Button
+                variant="outlined"
+                onClick={() => setShowCollectionPicker(true)}
+                sx={{ flex: 1 }}
+              >
+                Choose from My Collection
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleSell}
+                sx={{ flex: 1 }}
+              >
+                List New Item
+              </Button>
+            </Box>
+            </Box>
         </Box>
 
         {/* Price Trend Chart */}
+        {location.state?.item && (
         <Box sx={{ mt: 4 }}>
           <Typography variant="h6" gutterBottom>
             Market History (Last 30 Days)
@@ -166,9 +211,30 @@ function Sell() {
             </ResponsiveContainer>
           </Box>
         </Box>
+        )}
       </Container>
+      {/* Collection Picker Dialog */}
+      <Dialog
+        open={showCollectionPicker}
+        onClose={() => setShowCollectionPicker(false)}
+      >
+        <DialogTitle>Select Item from Collection</DialogTitle>
+        <DialogContent>
+          <List>
+            {collectionItemsData.map((item) => (
+              <ListItem
+                button
+                key={item.id}
+                onClick={() => handleSelectFromCollection(item)}
+              >
+                <ListItemText primary={item.name} />
+              </ListItem>
+            ))}
+          </List>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
-
+  
 export default Sell;
