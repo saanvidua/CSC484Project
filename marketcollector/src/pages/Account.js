@@ -21,53 +21,23 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 
-//Collection
+// MyCollection: Renders a button to navigate to Collection.js
 function MyCollection() {
   const navigate = useNavigate();
 
-  
-  const collectionProducts = [
-    { id: 1, name: "Collection Item 1", image: "https://via.placeholder.com/300x200", price: "$10.00" },
-    { id: 2, name: "Collection Item 2", image: "https://via.placeholder.com/300x200", price: "$20.00" },
-    { id: 3, name: "Collection Item 3", image: "https://via.placeholder.com/300x200", price: "$30.00" },
-  ];
-
   return (
-    <Box sx={{ mt: 2 }}>
+    <Box sx={{ mt: 2, textAlign: "center" }}>
       <Typography variant="h6" gutterBottom>
         My Collection
       </Typography>
-      <Grid container spacing={2}>
-        {collectionProducts.map((product) => (
-          <Grid item key={product.id} xs={12} sm={6} md={4}>
-            <Card
-              onClick={() => navigate("/collection")}
-              sx={{ cursor: "pointer", "&:hover": { boxShadow: 6 } }}
-            >
-              <CardMedia
-                component="img"
-                height="140"
-                image={product.image}
-                alt={product.name}
-              />
-              <CardContent>
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {product.price}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">View Collection</Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Button variant="contained" onClick={() => navigate("/collection")}>
+        Go to Collection
+      </Button>
     </Box>
   );
 }
 
-//Favorites 
+// Favorites 
 function Favorites() {
   const favoriteItems = [
     { id: 1, name: "Favorite Item 1", image: "https://via.placeholder.com/300x200", price: "$15.00" },
@@ -107,7 +77,7 @@ function Favorites() {
   );
 }
 
-// Price tracking
+// Price Tracking
 function PriceTracking() {
   const trackingItems = [
     { id: 1, name: "Tracked Item 1", image: "https://via.placeholder.com/300x200", price: "$12.00" },
@@ -195,7 +165,7 @@ function SettingsForm() {
   );
 }
 
-//Account
+// Account
 export default function Account() {
   const [tabValue, setTabValue] = React.useState(0);
 
