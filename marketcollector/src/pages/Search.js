@@ -113,10 +113,10 @@ export default function Explore() {
                             onKeyDown={handleKeyDown}
                             InputProps={{ sx: { backgroundColor: "white", borderRadius: "4px" } }}
                         />
-                        <IconButton onClick={handleSearch}>
+                        <IconButton onClick={handleSearch} sx={{ color: 'secondary.main' }}>
                             <SearchIcon />
                         </IconButton>
-                        <IconButton onClick={openFilterMenu}>
+                        <IconButton onClick={openFilterMenu} sx={{ color: 'secondary.main' }}>
                             <FilterListIcon />
                         </IconButton>
                     </Box>

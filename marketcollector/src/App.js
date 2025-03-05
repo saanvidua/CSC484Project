@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SellIcon from "@mui/icons-material/Sell";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Box from "@mui/material/Box";
 import "./App.css";
 
 function BottomNavBar() {
@@ -37,11 +38,51 @@ function BottomNavBar() {
         boxShadow: "0px -2px 5px rgba(0,0,0,0.1)",
       }}
     >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" value="/" />
-      <BottomNavigationAction label="Explore" icon={<SearchIcon />} component={Link} to="/search" value="/search" />
-      <BottomNavigationAction label="Sell" icon={<SellIcon />} component={Link} to="/sell" value="/sell" />
-      <BottomNavigationAction label="Collection" icon={<CollectionsIcon />} component={Link} to="/collection" value="/collection" />
-      <BottomNavigationAction label="Account" icon={<AccountCircleIcon />} component={Link} to="/account" value="/account" />
+      <BottomNavigationAction label="Home"
+    icon={
+      <Box sx={{ color: location.pathname === '/' ? 'secondary.main' : 'inherit' }}>
+          <HomeIcon />
+      </Box>
+  }
+    component={Link}
+    to="/"
+    value="/" />
+      <BottomNavigationAction label="Explore"
+    icon={
+      <Box sx={{ color: location.pathname === '/search' ? 'secondary.main' : 'inherit' }}>
+          <SearchIcon />
+      </Box>
+  }
+    component={Link}
+    to="/search"
+    value="/search" />
+      <BottomNavigationAction label="Sell"
+    icon={
+      <Box sx={{ color: location.pathname === '/sell' ? 'secondary.main' : 'inherit' }}>
+          <SellIcon />
+      </Box>
+  }
+    component={Link}
+    to="/sell"
+    value="/sell" />
+      <BottomNavigationAction label="Collection"
+    icon={
+      <Box sx={{ color: location.pathname === '/collection' ? 'secondary.main' : 'inherit' }}>
+          <CollectionsIcon />
+      </Box>
+  }
+    component={Link}
+    to="/collection"
+    value="/collection" />
+      <BottomNavigationAction label="Account"
+    icon={
+      <Box sx={{ color: location.pathname === '/account' ? 'secondary.main' : 'inherit' }}>
+          <AccountCircleIcon />
+      </Box>
+  }
+    component={Link}
+    to="/account"
+    value="/account" />
     </BottomNavigation>
   );
 }
