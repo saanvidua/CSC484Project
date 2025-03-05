@@ -41,10 +41,13 @@ export default function Explore() {
     const [searchTerm, setSearchTerm] = useState("");
     const [items, setItems] = useState(initialItems);  // Start with trending/recommended
     const [anchorEl, setAnchorEl] = useState(null);  // For filter menu
+    const [searchPerformed, setSearchPerformed] = useState(false);  // Track if a search was performed
+
 
     const handleSearch = () => {
         // On search (button click or Enter), show the hardcoded searchResults (ignoring the actual term)
         setItems(searchResults);
+        setSearchPerformed(true);
     };
 
     const handleKeyDown = (e) => {
@@ -125,7 +128,10 @@ export default function Explore() {
                         <MenuItem onClick={() => handleSort("asc")}>Price: Low to High</MenuItem>
                         <MenuItem onClick={() => handleSort("desc")}>Price: High to Low</MenuItem>
                     </Menu>
-
+                    {/* Section Title - Trending Items or Search Results */}
+                    <Typography variant="h5" sx={{ mb: 2 }}>
+                        {searchPerformed ? "Search Results" : "Trending Items"}
+                    </Typography>
                     {/* Items Grid */}
                     <Grid container spacing={2}>
                         {items.map((item) => (
