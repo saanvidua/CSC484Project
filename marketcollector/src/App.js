@@ -9,6 +9,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import './App.css';
 
 function App() {
@@ -17,6 +25,11 @@ function App() {
     { id: 1, name: 'Product 1', image: 'https://via.placeholder.com/300x200', price: '$10.00' },
     { id: 2, name: 'Product 2', image: 'https://via.placeholder.com/300x200', price: '$20.00' },
     { id: 3, name: 'Product 3', image: 'https://via.placeholder.com/300x200', price: '$30.00' },
+    { id: 4, name: 'Product 4', image: 'https://via.placeholder.com/300x200', price: '$40.00' },
+    { id: 4, name: 'Product 5', image: 'https://via.placeholder.com/300x200', price: '$40.00' },
+    { id: 4, name: 'Product 6', image: 'https://via.placeholder.com/300x200', price: '$40.00' },
+    { id: 4, name: 'Product 7', image: 'https://via.placeholder.com/300x200', price: '$40.00' },
+    { id: 4, name: 'Product 8', image: 'https://via.placeholder.com/300x200', price: '$40.00' },
   ];
 
   return (
@@ -44,7 +57,7 @@ function App() {
         {/* Product Cards */}
         <Grid container spacing={4} sx={{ mt: 2 }}>
           {products.map((product) => (
-            <Grid item key={product.id} xs={12} sm={6} md={4}>
+            <Grid item key={product.id} xs={6} sm={6}>
               <Card>
                 <CardMedia
                   component="img"
@@ -69,6 +82,17 @@ function App() {
           ))}
         </Grid>
       </Container>
+      {/* Bottom Navigation */}
+      <BottomNavigation
+        showLabels
+        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, backgroundColor: 'white', boxShadow: '0px -2px 5px rgba(0,0,0,0.1)' }}
+      >
+        <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+        <BottomNavigationAction label="Search" icon={<SearchIcon />} />
+        <BottomNavigationAction label="Cart" icon={<ShoppingCartIcon />} />
+        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Profile" icon={<AccountCircleIcon />} />
+      </BottomNavigation>
     </div>
   );
 }
