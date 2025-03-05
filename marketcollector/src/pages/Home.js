@@ -14,6 +14,10 @@ function Home() {
     { id: 2, name: "Product 2", image: "https://via.placeholder.com/300x200", price: "$20.00" },
     { id: 3, name: "Product 3", image: "https://via.placeholder.com/300x200", price: "$30.00" },
     { id: 4, name: "Product 4", image: "https://via.placeholder.com/300x200", price: "$40.00" },
+    { id: 4, name: "Product 5", image: "https://via.placeholder.com/300x200", price: "$40.00" },
+    { id: 4, name: "Product 6", image: "https://via.placeholder.com/300x200", price: "$40.00" },
+    { id: 4, name: "Product 7", image: "https://via.placeholder.com/300x200", price: "$40.00" },
+    { id: 4, name: "Product 8", image: "https://via.placeholder.com/300x200", price: "$40.00" },
   ];
 
   return (
