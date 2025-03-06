@@ -42,7 +42,7 @@ function ExploreItemDetails() {
                     <Typography variant="h6" color="primary">{item.price}</Typography>
                     <Typography variant="body1" sx={{ mt: 2 }}>{item.description}</Typography>
                     <CardActions sx={{ mt: 2 }}>
-                        <Button variant="contained" color="primary">Buy Now</Button>
+                        <Button variant="contained" onClick={() => navigate("/Buy")} color="primary">Buy Now </Button>
                         <Button variant="outlined">Add to Favorites</Button>
                     </CardActions>
                 </Grid>

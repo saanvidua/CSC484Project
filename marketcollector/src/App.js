@@ -8,7 +8,8 @@ import Sell from "./pages/Sell";
 import Account from "./pages/Account";
 import CollectionItemDetails from "./pages/collectionItemDetails"; // Ensure this file exists
 import ExploreItemDetails from "./pages/exploreItemDetails"; // Ensure this file exists
-import OrderConfirm from "./pages/OrderConfirm"; // Ensure this file exists
+import OrderConfirm from "./pages/OrderConfirm";
+import Buy from "./pages/Buy"; // Ensure this file exists
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -95,6 +96,7 @@ function App() {
         <Route path="/collection" element={<Collection />} />
         <Route path="/search" element={<Search />} />
         <Route path="/sell" element={<Sell />} />
+        <Route path="/buy" element={<Buy />} />
         <Route path="/account" element={<Account />} />
         <Route path="/order-confirm" element={<OrderConfirm />} />
         <Route path="/item/:id" element={<ExploreItemDetails />} />
