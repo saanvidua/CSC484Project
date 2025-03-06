@@ -40,9 +40,9 @@ function MyCollection() {
 // Favorites 
 function Favorites() {
   const favoriteItems = [
-    { id: 1, name: "Favorite Item 1", image: "/images/char.jpg", price: "$15.00" },
-    { id: 2, name: "Favorite Item 2", image: "/images/luka.webp", price: "$25.00" },
-    { id: 3, name: "Favorite Item 3", image: "/images/pika.jpg", price: "$35.00" },
+    { id: 1, name: "Charizard Card", image: "/images/char.jpg", price: "$15.00" },
+    { id: 2, name: "Jersey", image: "/images/luka.webp", price: "$25.00" },
+    { id: 3, name: "Pikachu Card", image: "/images/pika.jpg", price: "$35.00" },
   ];
 
   return (
@@ -80,9 +80,9 @@ function Favorites() {
 // Price Tracking
 function PriceTracking() {
   const trackingItems = [
-    { id: 1, name: "Tracked Item 1", image: "/images/char.jpg", price: "$12.00" },
-    { id: 2, name: "Tracked Item 2", image: "/images/pika.jpg", price: "$22.00" },
-    { id: 3, name: "Tracked Item 3", image: "/images/char.jpg", price: "$32.00" },
+    { id: 1, name: "Charizard Card", image: "/images/char.jpg", price: "$12.00" },
+    { id: 2, name: "Jersey", image: "/images/luka.webp", price: "$22.00" },
+    { id: 3, name: "Pikachu Card", image: "/images/pika.jpg", price: "$32.00" },
   ];
 
   return (
