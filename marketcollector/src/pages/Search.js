@@ -31,7 +31,7 @@ const searchResults = [
     { id: 4, name: 'Captain America Funko Pop', image: '/images/americafunko.jpg', price: 15.00 },
     { id: 5, name: 'Special Edition Red Hulk FP', image: '/images/redhulk.webp', price: 30.00 },
     { id: 6, name: '8 Rare Marvel Funko Pops!', image: '/images/rarefunko.jpg', price: 150.00 },
-    { id: 7, name: 'Marvel Spidey Funko Exclusive Sale', image: '/images/spideyfunko.webp', price: 25.00 },
+    { id: 7, name: 'Marvel Spidey Funko Exclusive Sale', image: '/images/spideyfunko.webp', price: 85.00 },
 ];
 
 export default function Explore() {
