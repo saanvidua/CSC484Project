@@ -185,7 +185,7 @@ export default function Account() {
       </AppBar>
 
       {/* Main Content */}
-      <Container sx={{ mt: 4 }}>
+      <Container sx={{ mt: 4, pb: 8 }}>
         <Box
           sx={{
             display: "flex",

@@ -81,7 +81,7 @@ function Collection() {
                 <AddIcon />
             </Fab>
 
-            <Container sx={{ mt: 4 }}>
+            <Container sx={{ mt: 4, pb: 8 }}>
                 <Typography variant="h4" gutterBottom>
                     My Collection
                 </Typography>

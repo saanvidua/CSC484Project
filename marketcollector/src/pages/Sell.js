@@ -101,7 +101,7 @@ function Sell() {
       </AppBar>
 
       {/* Main Content */}
-      <Container sx={{ mt: 4 }}>
+      <Container sx={{ mt: 4, pb: 8 }}>
         <Typography variant="h4" gutterBottom>
           List an item for sale
         </Typography>

@@ -25,7 +25,7 @@ function Home() {
         </Toolbar>
       </AppBar>
 
-      <Container sx={{ mt: 4 }}>
+      <Container sx={{ mt: 4, pb: 8 }}>
         <Typography variant="h4" gutterBottom> Welcome to MarketCollector! </Typography>
         <Typography variant="body1" gutterBottom> Explore a wide variety of products. </Typography>
 

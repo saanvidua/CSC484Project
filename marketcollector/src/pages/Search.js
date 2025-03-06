@@ -85,7 +85,7 @@ export default function Explore() {
 
             {/* Scrollable Content Area */}
             <Box sx={{ mt: 8, flex: 1, overflowY: "auto" }}>
-                <Container sx={{ mt: 2 }}>
+                <Container sx={{ mt: 2, pb: 8 }}>
                     <Typography variant="h4" gutterBottom>
                         Explore Items
                     </Typography>
