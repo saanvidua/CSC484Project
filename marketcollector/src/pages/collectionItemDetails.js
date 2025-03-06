@@ -25,13 +25,13 @@ function CollectionItemDetails() {
     };
 
     return (
-        <Container sx={{ mt: 4 }}>
+        <Container sx={{ mt: 4, pb: 8 }}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={() => navigate(-1)} aria-label="back">
                         <ArrowBackIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>My Collection Item</Typography>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>My Collections</Typography>
                 </Toolbar>
             </AppBar>
 

@@ -13,7 +13,7 @@ function ExploreItemDetails() {
 
     if (!item) {
         return (
-            <Container sx={{ mt: 4 }}>
+            <Container sx={{ mt: 4, pb: 8 }}>
                 <Typography variant="h4">Item not found</Typography>
                 <Button variant="contained" sx={{ mt: 2 }} onClick={() => navigate("/")}>Go Back to Home</Button>
             </Container>
@@ -21,7 +21,7 @@ function ExploreItemDetails() {
     }
 
     return (
-        <Container sx={{ mt: 4 }}>
+        <Container sx={{ mt: 4, pb: 8 }}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={() => navigate(-1)} aria-label="back">
