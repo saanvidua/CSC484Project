@@ -33,7 +33,7 @@ function Buy() {
       </AppBar>
 
       {/* Form Container */}
-      <Container maxWidth="sm" sx={{ mt: 4 }}>
+      <Container maxWidth="sm" sx={{ mt: 4, pb: 10 }} >
         <form onSubmit={handleSubmit}>
           <Typography variant="h6" gutterBottom>
             Shipping Information
@@ -92,7 +92,7 @@ function Buy() {
           />
 
           <Box sx={{ mt: 4, display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" onClick={() => navigate("/confirm")} color="primary" type="submit">
               Submit Payment
             </Button>
             <Button variant="outlined" color="secondary" onClick={handleGoHome}>
