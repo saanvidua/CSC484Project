@@ -14,12 +14,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 
 // MyCollection: Renders a button to navigate to Collection.js
 function MyCollection() {
@@ -117,53 +111,6 @@ function PriceTracking() {
   );
 }
 
-// Settings
-function SettingsForm() {
-  const [notifications, setNotifications] = React.useState(true);
-  const [darkMode, setDarkMode] = React.useState(false);
-  const [language, setLanguage] = React.useState("en");
-
-  return (
-    <Box sx={{ mt: 2 }}>
-      <Typography variant="h6" gutterBottom>
-        Basic Settings
-      </Typography>
-      <FormControlLabel
-        control={
-          <Switch
-            checked={notifications}
-            onChange={(e) => setNotifications(e.target.checked)}
-            color="primary"
-          />
-        }
-        label="Enable Notifications"
-      />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={darkMode}
-            onChange={(e) => setDarkMode(e.target.checked)}
-            color="primary"
-          />
-        }
-        label="Enable Dark Mode"
-      />
-      <FormControl fullWidth sx={{ mt: 2 }}>
-        <InputLabel id="language-select-label">Language</InputLabel>
-        <Select
-          labelId="language-select-label"
-          value={language}
-          label="Language"
-          onChange={(e) => setLanguage(e.target.value)}
-        >
-          <MenuItem value="en">English</MenuItem>
-          <MenuItem value="es">Spanish</MenuItem>
-          <MenuItem value="fr">French</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-}
 
 // Account
 export default function Account() {
@@ -218,7 +165,6 @@ export default function Account() {
             <Tab label="My Collection" />
             <Tab label="Favorites" />
             <Tab label="Price Tracking" />
-            <Tab label="Settings" />
           </Tabs>
         </Box>
 
@@ -227,7 +173,6 @@ export default function Account() {
           {tabValue === 0 && <MyCollection />}
           {tabValue === 1 && <Favorites />}
           {tabValue === 2 && <PriceTracking />}
-          {tabValue === 3 && <SettingsForm />}
         </Box>
       </Container>
     </>
