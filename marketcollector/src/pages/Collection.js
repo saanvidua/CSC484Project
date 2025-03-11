@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -16,18 +16,16 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
-const LOCAL_STORAGE_KEY = "collectionItems"; // Key for local storage
+import collectionItemsData from "../data/collectionItemsData";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 function Collection() {
     const navigate = useNavigate();
-
-    // Load collection items from localStorage or fallback to initial data
-    const [items, setItems] = useState(() => {
-        const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-        return storedItems ? JSON.parse(storedItems) : [];
-    });
-
+    
+    // Initialize with hardcoded items + stored items
+    const storedItems = JSON.parse(localStorage.getItem("collectionItems")) || [];
+    const [items, setItems] = useState([...collectionItemsData, ...storedItems]);
+    
     const [openDialog, setOpenDialog] = useState(false);
     const [newItem, setNewItem] = useState({
         name: "",
@@ -35,24 +33,19 @@ function Collection() {
         price: "",
         image: "",
     });
-
-    // Update localStorage whenever items change
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
-    }, [items]);
-
+    
     const handleNavigateToItemDetails = (item) => {
         navigate(`/collection-item/${item.id}`, { state: { item } });
     };
-
+    
     const handleOpenDialog = () => setOpenDialog(true);
     const handleCloseDialog = () => setOpenDialog(false);
-
+    
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewItem((prev) => ({ ...prev, [name]: name === 'price' ? value.replace(/[^0-9.]/g, '') : value }));
+        setNewItem((prev) => ({ ...prev, [name]: name === 'price' ? `$${value.replace(/[^0-9.]/g, '')}` : value }));
     };
-
+    
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -63,18 +56,27 @@ function Collection() {
             reader.readAsDataURL(file);
         }
     };
-
+    
+    const generatePriceTrend = (basePrice) => {
+      const base = parseFloat(basePrice.replace("$", ""));
+      if (isNaN(base)) return [];
+      return Array.from({ length: 7 }, (_, i) => ({
+          day: `Day ${i + 1}`,
+          price: parseFloat((base * (1 + (Math.random() * 0.3 - 0.15))).toFixed(2)) // Store as number
+      }));
+  };
+  
     const handleAddItem = () => {
-        const newItemWithId = { ...newItem, id: Date.now() }; // Unique ID
+        const newItemWithId = { ...newItem, id: Date.now(), priceTrend: generatePriceTrend(newItem.price) };
         const updatedItems = [...items, newItemWithId];
         setItems(updatedItems);
+        localStorage.setItem("collectionItems", JSON.stringify(updatedItems.filter(item => !collectionItemsData.some(hardcoded => hardcoded.id === item.id))));
         setNewItem({ name: "", description: "", price: "", image: "" });
         setOpenDialog(false);
     };
-
+    
     return (
         <div>
-            {/* Header */}
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -83,7 +85,6 @@ function Collection() {
                 </Toolbar>
             </AppBar>
 
-            {/* Add Item Button */}
             <Fab 
                 color="primary" 
                 sx={{ position: "fixed", bottom: 60, right: 16 }} 
@@ -97,7 +98,6 @@ function Collection() {
                     My Collection
                 </Typography>
 
-                {/* Display Items */}
                 <Grid container spacing={2}>
                     {items.map((item) => (
                         <Grid item xs={12} sm={6} md={4} key={item.id}>
@@ -118,7 +118,6 @@ function Collection() {
                 </Grid>
             </Container>
 
-            {/* Add Item Dialog */}
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle>Add New Item</DialogTitle>
                 <DialogContent>
@@ -172,3 +171,4 @@ function Collection() {
 }
 
 export default Collection;
+

@@ -98,10 +98,6 @@ function Sell({ setItems }) {
         <Typography variant="h4" gutterBottom>
           List an Item for Sale
         </Typography>
-        <Typography variant="body1" gutterBottom>
-          Fill out the details to list your item for sale.
-        </Typography>
-
         <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, mt: 3 }}>
           {/* Image Preview */}
           <Card sx={{ border: "4px solid #000000", borderRadius: "8px", width: { xs: "100%", md: 250 } }}>
