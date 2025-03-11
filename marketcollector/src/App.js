@@ -35,10 +35,10 @@ const theme = createTheme({
   typography: {
     fontFamily: "Roboto, sans-serif",
     // Uncomment or adjust these overrides if you truly want the same size for all variants:
-    // h4: {
-    //   fontSize: '1rem',
-    //   fontWeight: 400,
-    // },
+     h4: {
+       fontSize: '1rem',
+       fontWeight: 400,
+     },
     // h6: {
     //   fontSize: '1rem',
     //   fontWeight: 400,
@@ -110,6 +110,7 @@ function App() {
   const [items, setItems] = useState(exploreItemsData);
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <Routes>
         <Route path="/" element={<Home items={items} />} />
@@ -126,6 +127,7 @@ function App() {
       {/* Bottom Navigation */}
       <BottomNavBar />
     </Router>
+     </ThemeProvider> 
   );
 }
 
