@@ -40,7 +40,7 @@ function Home({ items }) {
               <Card
                 sx={{
                   cursor: "pointer",
-                  border: "4px solid #80471C",
+                  border: "4px solid #000000",
                   borderRadius: "8px",
                   "&:hover": { boxShadow: 6 },
                   height: "100%"

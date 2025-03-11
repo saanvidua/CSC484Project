@@ -104,7 +104,7 @@ function Sell({ setItems }) {
 
         <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, mt: 3 }}>
           {/* Image Preview */}
-          <Card sx={{ border: "4px solid #80471C", borderRadius: "8px", width: { xs: "100%", md: 250 } }}>
+          <Card sx={{ border: "4px solid #000000", borderRadius: "8px", width: { xs: "100%", md: 250 } }}>
             <CardMedia component="img" image={image} alt="Item Image" sx={{ height: 200, objectFit: "cover" }} />
             <CardContent>
               <Typography variant="body2">Image Preview</Typography>

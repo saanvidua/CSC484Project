@@ -102,7 +102,7 @@ function Collection() {
                     {items.map((item) => (
                         <Grid item xs={12} sm={6} md={4} key={item.id}>
                             <Card
-                                sx={{ border: '4px solid #80471C', borderRadius: '8px', height: '16em',
+                                sx={{ border: '4px solid #000000', borderRadius: '8px', height: '16em',
                                     cursor: "pointer", "&:hover": { boxShadow: 6 } }}
                                 onClick={() => handleNavigateToItemDetails(item)}
                             >
