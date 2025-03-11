@@ -85,7 +85,7 @@ function Collection() {
 
             {/* Add Item Button */}
             <Fab 
-                color="secondary" 
+                color="primary" 
                 sx={{ position: "fixed", bottom: 60, right: 16 }} 
                 onClick={handleOpenDialog}
             >
