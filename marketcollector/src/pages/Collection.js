@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -8,7 +8,6 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import collectionItemsData from "../data/collectionItemsData"; 
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Dialog from "@mui/material/Dialog";
@@ -18,14 +17,18 @@ import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
+const LOCAL_STORAGE_KEY = "collectionItems"; // Key for local storage
+
 function Collection() {
     const navigate = useNavigate();
 
-    // Move collectionItemsData into state to allow adding items dynamically
-    const [items, setItems] = useState(collectionItemsData);
+    // Load collection items from localStorage or fallback to initial data
+    const [items, setItems] = useState(() => {
+        const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        return storedItems ? JSON.parse(storedItems) : [];
+    });
 
     const [openDialog, setOpenDialog] = useState(false);
-
     const [newItem, setNewItem] = useState({
         name: "",
         description: "",
@@ -33,16 +36,22 @@ function Collection() {
         image: "",
     });
 
+    // Update localStorage whenever items change
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(items));
+    }, [items]);
+
     const handleNavigateToItemDetails = (item) => {
-      navigate(`/collection-item/${item.id}`, { state: { item } });
-  };
-  const handleOpenDialog = () => setOpenDialog(true);
+        navigate(`/collection-item/${item.id}`, { state: { item } });
+    };
+
+    const handleOpenDialog = () => setOpenDialog(true);
     const handleCloseDialog = () => setOpenDialog(false);
 
     const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setNewItem((prev) => ({ ...prev, [name]: name === 'price' ? value.replace(/[^0-9.]/g, '') : value }));
-  };
+        const { name, value } = e.target;
+        setNewItem((prev) => ({ ...prev, [name]: name === 'price' ? value.replace(/[^0-9.]/g, '') : value }));
+    };
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -56,8 +65,9 @@ function Collection() {
     };
 
     const handleAddItem = () => {
-        const newItemWithId = { ...newItem, id: items.length + 1 };
-        setItems([...items, newItemWithId]);
+        const newItemWithId = { ...newItem, id: Date.now() }; // Unique ID
+        const updatedItems = [...items, newItemWithId];
+        setItems(updatedItems);
         setNewItem({ name: "", description: "", price: "", image: "" });
         setOpenDialog(false);
     };
@@ -72,6 +82,7 @@ function Collection() {
                     </Typography>
                 </Toolbar>
             </AppBar>
+
             {/* Add Item Button */}
             <Fab 
                 color="secondary" 
@@ -85,17 +96,13 @@ function Collection() {
                 <Typography variant="h4" gutterBottom>
                     My Collection
                 </Typography>
-                <Typography variant="body1" gutterBottom>
-                    View and manage your collections
-                </Typography>
 
                 {/* Display Items */}
                 <Grid container spacing={2}>
                     {items.map((item) => (
                         <Grid item xs={12} sm={6} md={4} key={item.id}>
                             <Card
-                                sx={{ border: '4px solid #80471C',  // Dark brown border
-                                borderRadius: '8px', cursor: "pointer", "&:hover": { boxShadow: 6 } }}
+                                sx={{ border: '4px solid #80471C', borderRadius: '8px', cursor: "pointer", "&:hover": { boxShadow: 6 } }}
                                 onClick={() => handleNavigateToItemDetails(item)}
                             >
                                 <CardMedia component="img" height="140" image={item.image} alt={item.name} />
@@ -109,6 +116,7 @@ function Collection() {
                     ))}
                 </Grid>
             </Container>
+
             {/* Add Item Dialog */}
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle>Add New Item</DialogTitle>
@@ -163,4 +171,3 @@ function Collection() {
 }
 
 export default Collection;
-
