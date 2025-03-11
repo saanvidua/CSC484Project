@@ -147,9 +147,7 @@ export default function Account() {
             sx={{ width: 80, height: 80, mb: 1 }}
           />
           <Typography variant="h5">484Username</Typography>
-          <Button variant="outlined" sx={{ mt: 1 }}>
-            Edit Profile
-          </Button>
+
         </Box>
 
         {/* Tabs */}
