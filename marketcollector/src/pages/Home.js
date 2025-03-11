@@ -26,7 +26,7 @@ function Home() {
       </AppBar>
 
       <Container sx={{ mt: 4, pb: 8 }}>
-        <Typography variant="h4" gutterBottom> For you </Typography>
+        <Typography variant="h4"  gutterBottom> For you </Typography>
         {/* Corrected Grid Layout */}
         <Grid container spacing={4} sx={{ mt: 2 }}>
           {exploreItemsData.map((product) => (
