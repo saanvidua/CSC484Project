@@ -12,12 +12,31 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-function CollectionItemDetails() {
+function CollectionItemDetails({ setItems }) {
     const { id } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
     
     const item = location.state?.item;
+
+    const handleSell = () => {
+        const newItem = {
+          id: Date.now(), // Unique ID
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          image: item.image,
+          condition: "Like New",
+          priceTrend: [{ day: "Day 1", price: parseFloat(item.price) }],
+        };
+    
+        // Update items list in state
+        setItems((prevItems) => [...prevItems, newItem]);
+    
+        // Navigate back to home
+        navigate("/collection");
+      };
+
 
     if (!item) {
         return (
@@ -53,7 +72,7 @@ function CollectionItemDetails() {
                     <Typography variant="h6" color="primary">{item.price}</Typography>
                     <Typography variant="body1" sx={{ mt: 2 }}>{item.description}</Typography>
                     <CardActions sx={{ mt: 2 }}>
-                        <Button variant="contained" color="primary">List for Sale</Button>
+                        <Button onClick={handleSell} variant="contained" color="primary">List for Sale</Button>
                     </CardActions>
                 </Grid>
             </Grid>

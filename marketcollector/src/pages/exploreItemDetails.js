@@ -5,11 +5,11 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import exploreItemsData from "../data/exploreItemsData";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-function ExploreItemDetails() {
+function ExploreItemDetails({ items }) {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const item = exploreItemsData.find(item => item.id === parseInt(id));
+    const item = items.find(item => item.id === parseInt(id));
 
     if (!item) {
         return (

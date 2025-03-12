@@ -120,8 +120,8 @@ function App() {
         <Route path="/buy" element={<Buy />} />
         <Route path="/account" element={<Account />} />
         <Route path="/order-confirm" element={<OrderConfirm />} />
-        <Route path="/item/:id" element={<ExploreItemDetails items={items} />} />
-        <Route path="/collection-item/:id" element={<CollectionItemDetails />} />
+        <Route path="/item/:id" element={<ExploreItemDetails items={items} setItems={setItems} />} />
+        <Route path="/collection-item/:id" element={<CollectionItemDetails setItems={setItems} />} />
       </Routes>
 
       {/* Bottom Navigation */}
