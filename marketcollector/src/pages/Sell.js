@@ -83,11 +83,11 @@ function Sell({ setItems }) {
   };
 
   return (
-    <div>
+    <Box sx={{ minHeight: "100vh", backgroundColor: "background.default" }}>
       {/* Header */}
-      <AppBar position="static">
+      <AppBar position="static" color="primary">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Sell
           </Typography>
         </Toolbar>
@@ -98,19 +98,51 @@ function Sell({ setItems }) {
         <Typography variant="h4" gutterBottom>
           List an Item for Sale
         </Typography>
-        <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 2, mt: 3 }}>
+
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            gap: 2,
+            mt: 3,
+          }}
+        >
           {/* Image Preview */}
-          <Card sx={{ border: "4px solid #000000", borderRadius: "8px", width: { xs: "100%", md: 250 } }}>
-            <CardMedia component="img" image={image} alt="Item Image" sx={{ height: 200, objectFit: "cover" }} />
+          <Card
+            sx={{
+              borderRadius: 2,
+              boxShadow: 3,
+              width: { xs: "100%", md: 250 },
+            }}
+          >
+            <CardMedia
+              component="img"
+              image={image}
+              alt="Item Image"
+              sx={{ height: 200, objectFit: "cover" }}
+            />
             <CardContent>
               <Typography variant="body2">Image Preview</Typography>
-              <input type="file" accept="image/*" style={{ marginTop: "10px" }} onChange={handleImageUpload} />
+              <Button
+                variant="outlined"
+                component="label"
+                sx={{ mt: 2 }}
+              >
+                Upload Image
+                <input type="file" accept="image/*" hidden onChange={handleImageUpload} />
+              </Button>
             </CardContent>
           </Card>
 
           {/* Input Fields */}
           <Box sx={{ flex: 1 }}>
-            <TextField label="Name" fullWidth sx={{ mb: 2 }} value={name} onChange={(e) => setName(e.target.value)} />
+            <TextField
+              label="Name"
+              fullWidth
+              sx={{ mb: 2 }}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <TextField
               label="Description"
               multiline
@@ -120,10 +152,21 @@ function Sell({ setItems }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <TextField label="Price" fullWidth sx={{ mb: 2 }} value={price} onChange={(e) => setPrice(e.target.value)} />
+            <TextField
+              label="Price"
+              fullWidth
+              sx={{ mb: 2 }}
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
             <FormControl fullWidth sx={{ mb: 2 }}>
               <InputLabel id="condition-label">Condition</InputLabel>
-              <Select labelId="condition-label" value={condition} label="Condition" onChange={(e) => setCondition(e.target.value)}>
+              <Select
+                labelId="condition-label"
+                value={condition}
+                label="Condition"
+                onChange={(e) => setCondition(e.target.value)}
+              >
                 <MenuItem value="New">New</MenuItem>
                 <MenuItem value="Like New">Like New</MenuItem>
                 <MenuItem value="Used">Used</MenuItem>
@@ -131,10 +174,18 @@ function Sell({ setItems }) {
             </FormControl>
 
             <Box sx={{ display: "flex", justifyContent: "space-between", gap: 2, mt: 2 }}>
-              <Button variant="outlined" onClick={() => setShowCollectionPicker(true)} sx={{ flex: 1 }}>
-                Choose from My Collection
+              <Button
+                variant="outlined"
+                onClick={() => setShowCollectionPicker(true)}
+                sx={{ flex: 1 }}
+              >
+                Select from My Collection
               </Button>
-              <Button variant="contained" onClick={handleSell} sx={{ flex: 1 }}>
+              <Button
+                variant="contained"
+                onClick={handleSell}
+                sx={{ flex: 1 }}
+              >
                 List Item
               </Button>
             </Box>
@@ -143,19 +194,26 @@ function Sell({ setItems }) {
       </Container>
 
       {/* Collection Picker Dialog */}
-      <Dialog open={showCollectionPicker} onClose={() => setShowCollectionPicker(false)}>
+      <Dialog
+        open={showCollectionPicker}
+        onClose={() => setShowCollectionPicker(false)}
+      >
         <DialogTitle>Select Item from Collection</DialogTitle>
         <DialogContent>
           <List>
             {collectionItemsData.map((item) => (
-              <ListItem button key={item.id} onClick={() => handleSelectFromCollection(item)}>
+              <ListItem
+                button
+                key={item.id}
+                onClick={() => handleSelectFromCollection(item)}
+              >
                 <ListItemText primary={item.name} />
               </ListItem>
             ))}
           </List>
         </DialogContent>
       </Dialog>
-    </div>
+    </Box>
   );
 }
 

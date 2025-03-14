@@ -11,6 +11,7 @@ import ExploreItemDetails from "./pages/exploreItemDetails";
 import OrderConfirm from "./pages/OrderConfirm";
 import Buy from "./pages/Buy";
 import exploreItemsData from "./data/exploreItemsData"; // Initial data
+import BuyConfirm from "./pages/BuyConfirm";
 
 // MUI components
 import BottomNavigation from "@mui/material/BottomNavigation";
@@ -117,6 +118,7 @@ function App() {
         <Route path="/order-confirm" element={<OrderConfirm />} />
         <Route path="/item/:id" element={<ExploreItemDetails items={items} setItems={setItems} />} />
         <Route path="/collection-item/:id" element={<CollectionItemDetails setItems={setItems} />} />
+        <Route path="/buyconfirm" element={<BuyConfirm />} />
       </Routes>
 
       {/* Bottom Navigation */}

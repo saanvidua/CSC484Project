@@ -54,17 +54,25 @@ function Search({ items }) {
   // Sort items by price
   const handleSort = (order) => {
     const sortedItems = [...filteredItems].sort((a, b) =>
-      order === "asc" ? parseFloat(a.price.replace("$", "")) - parseFloat(b.price.replace("$", ""))
-                      : parseFloat(b.price.replace("$", "")) - parseFloat(a.price.replace("$", ""))
+      order === "asc"
+        ? parseFloat(a.price.replace("$", "")) - parseFloat(b.price.replace("$", ""))
+        : parseFloat(b.price.replace("$", "")) - parseFloat(a.price.replace("$", ""))
     );
     setFilteredItems(sortedItems);
     closeFilterMenu();
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+        backgroundColor: "background.default", // Use theme background
+      }}
+    >
       {/* Fixed Header */}
-      <AppBar position="fixed">
+      <AppBar position="fixed" color="primary">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             Explore
@@ -85,10 +93,10 @@ function Search({ items }) {
               display: "flex",
               alignItems: "center",
               gap: 1,
-              backgroundColor: "#f5f5f5",
-              borderRadius: "8px",
-              padding: "4px 8px",
-              mb: 3
+              backgroundColor: "background.paper",
+              borderRadius: 2,
+              p: 1,
+              mb: 3,
             }}
           >
             <TextField
@@ -98,7 +106,12 @@ function Search({ items }) {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
-              InputProps={{ sx: { backgroundColor: "white", borderRadius: "4px" } }}
+              InputProps={{
+                sx: {
+                  backgroundColor: "white",
+                  borderRadius: 1,
+                },
+              }}
             />
             <IconButton onClick={handleSearch} sx={{ color: "secondary.main" }}>
               <SearchIcon />
@@ -119,23 +132,40 @@ function Search({ items }) {
             {filteredItems.length ? "Search Results" : "No results found"}
           </Typography>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={3}>
             {filteredItems.map((item) => (
               <Grid item xs={12} sm={6} md={3} key={item.id}>
                 <Card
                   sx={{
-                    border: "4px solid #000000",
-                    borderRadius: "8px",
                     cursor: "pointer",
-                    "&:hover": { boxShadow: 6 },
-                    height: "100%"
+                    borderRadius: 2,
+                    transition: "transform 0.3s, box-shadow 0.3s",
+                    "&:hover": {
+                      transform: "translateY(-4px)",
+                      boxShadow: 6,
+                    },
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
                   onClick={() => navigate(`/item/${item.id}`)}
                 >
-                  <CardMedia component="img" height="140" image={item.image} alt={item.name} />
-                  <CardContent>
-                    <Typography variant="h6">{item.name}</Typography>
-                    <Typography variant="body2">Price: {item.price}</Typography>
+                  <CardMedia
+                    component="img"
+                    image={item.image}
+                    alt={item.name}
+                    sx={{
+                      height: 220,
+                      objectFit: "cover",
+                    }}
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" gutterBottom>
+                      {item.name}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      Price: {item.price}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
